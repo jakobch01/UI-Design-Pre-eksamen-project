@@ -1,0 +1,213 @@
+/* Global styles for text */
+.text {
+  color: inherit;
+}
+
+/* Card styling for content */
+.card {
+  background-color: white;
+  color: black;
+  padding: 1em;
+  border-radius: 8px;
+  margin-bottom: 1em;
+  border: 1px solid #ddd;
+}
+
+body.dark .card {
+  background-color: #1e1e1e;
+  color: #f0f0f0;
+  border: 1px solid #444;
+}
+
+/* Light mode base styles */
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  background-color: #f9f9f9;
+  color: #222;
+  line-height: 1.6;
+}
+
+/* Input and Button styles */
+input, button {
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 0.5em;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+button:focus {
+  outline: none;
+}
+
+/* Header styling */
+h1, h2, h3 {
+  color: #111;
+}
+
+/* Dark mode styles */
+body.dark {
+  background-color: #121212;
+  color: #f0f0f0;
+}
+
+body.dark input,
+body.dark button {
+  background-color: #1e1e1e;
+  color: #f0f0f0;
+  border: 1px solid #444;
+}
+
+body.dark input[type="date"],
+body.dark input[type="time"] {
+  background-color: #2c2c2c;
+  color: #f0f0f0;
+}
+
+body.dark button:hover {
+  background-color: #333;
+}
+
+/* Body Styling */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f0f0;
+}
+
+/* App container */
+.App {
+  text-align: center;
+  padding: 20px;
+}
+
+/* Dark Mode Toggle button */
+.dark-toggle {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 1000;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: inherit; /* Make sure the button inherits color from the body */
+  padding: 10px; /* Ensure the button has proper padding */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+}
+
+/* Dark Mode specific styles for the toggle button */
+body.dark .dark-toggle {
+  background-color: #444; /* Darker background in dark mode */
+  color: #f0f0f0; /* Light text color */
+}
+
+body.dark .dark-toggle:hover {
+  background-color: #555; /* Slightly lighter background on hover */
+}
+
+/* Styling for the search bar */
+.search-bar {
+  position: fixed;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 999;
+  display: flex;
+  gap: 10px;
+  background: #fff;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Dark mode background for the search bar */
+body.dark .search-bar {
+  background: #444;
+}
+
+/* Input field styling */
+input[type="text"] {
+  padding: 10px;
+  width: 300px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+
+/* Focus styling for input field */
+input[type="text"]:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Button styling for consistency */
+button {
+  padding: 10px 15px;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+/* Button hover effect */
+button:hover {
+  background-color: #0056b3;
+}
+
+button:focus {
+  outline: none;
+}
+
+/* Ensuring proper text color inheritance */
+body, h1, h2, h3, p {
+  color: inherit;
+}
+
+/* Additional Dark Mode Styling for Text */
+body.dark h1, body.dark h2, body.dark h3, body.dark p {
+  color: #f0f0f0;  /* Light text in dark mode */
+}
+
+body.dark button {
+  background-color: #1e1e1e;
+  color: white;
+  border: 1px solid #444;
+}
+
+body.dark .App {
+  background-color: #121212;
+  color: white;
+}
+
+.welcome-message {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+
+/* Light mode styles for form elements */
+body input[type="date"],
+body input[type="time"] {
+  background-color: #fff;
+  color: #333;
+  border: 1px solid #ccc;
+}

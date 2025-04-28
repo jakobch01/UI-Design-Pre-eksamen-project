@@ -1,0 +1,153 @@
+import { useState, useEffect } from "react";
+import LoginForm from "./LoginForm";
+import RoomList from "./RoomList";
+import AdminPanel from "./AdminPanel";
+import './App.css';
+import logo from './images/EAMV_logo.jpg'; // Importing the logo
+
+function App() {
+  const [user, setUser] = useState(null);
+  const [darkMode, setDarkMode] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [language, setLanguage] = useState("en"); // Default language is English
+
+  // Apply dark mode class to <body>
+  useEffect(() => {
+    if (darkMode) {
+      document.body.classList.add('dark');
+    } else {
+      document.body.classList.remove('dark');
+    }
+
+    // Check for stored language in localStorage
+    const storedLanguage = localStorage.getItem('language');
+    if (storedLanguage) {
+      setLanguage(storedLanguage);
+    }
+  }, [darkMode]);
+
+  // Toggle between Danish and English
+  const toggleLanguage = () => {
+    const newLanguage = language === "en" ? "da" : "en";
+    setLanguage(newLanguage);
+    localStorage.setItem('language', newLanguage); // Save the selected language to localStorage
+  };
+
+  // Text based on selected language
+  const texts = {
+    en: {
+      welcome: `Welcome, ${user?.email || 'Guest'}`,
+      logout: "Logout",
+      roomListTitle: "Available Rooms",
+      searchPlaceholder: "Search rooms by name",
+      noRoomsMessage: "No rooms match your search.",
+      roomSelected: "Select Room",
+      bookRoomButton: "Book Room",
+      bookingRequestedMessage: "Room booking requested and pending approval.",
+      alreadyBookedMessage: "You have already requested this room for the selected date and time.",
+      pleaseSelectDateTime: "Please select both a date and a time.",
+      adminPanel: "Admin Panel",
+      pendingBookings: "Pending Bookings",
+      noBookings: "No bookings yet.",
+      approve: "Approve",
+      disapprove: "Disapprove"
+    },
+    da: {
+      welcome: `Velkommen, ${user?.email || 'Gæst'}`,
+      logout: "Log ud",
+      roomListTitle: "Ledige Lokaler",
+      searchPlaceholder: "Søg lokaler efter navn",
+      noRoomsMessage: "Ingen lokaler matcher din søgning.",
+      roomSelected: "Vælg lokale",
+      bookRoomButton: "Book lokale",
+      bookingRequestedMessage: "Lokale booking anmodning og ventende godkendelse.",
+      alreadyBookedMessage: "Du har allerede anmodet om dette lokale til den valgte dato og tid.",
+      pleaseSelectDateTime: "Vælg både en dato og et tidspunkt.",
+      adminPanel: "Admin Panel",
+      pendingBookings: "Ventende bookinger",
+      noBookings: "Ingen bookinger endnu.",
+      approve: "Godkend",
+      disapprove: "Afvis"
+    }
+  };
+
+  return (
+    <div style={{ padding: 20 }}>
+      {/* Banner Section - Using Image */}
+      <div
+        style={{
+          width: "100%",
+          height: "200px", // Adjust height as needed
+          marginBottom: "20px"
+        }}
+      >
+        <img
+          src={logo} // Use the imported logo variable
+          alt="Banner"
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover", // Ensures the image covers the area without stretching
+          }}
+        />
+      </div>
+
+      {/* Buttons Section under the Banner */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-end", // Align buttons to the right
+          gap: 10,
+          marginBottom: 20, // Space between the buttons and the content below
+        }}
+      >
+        {/* Dark Mode Toggle */}
+        <button
+          onClick={() => setDarkMode(!darkMode)}
+          style={{ padding: 8, fontSize: "18px" }}
+        >
+          {darkMode ? "🌞" : "🌙"}
+        </button>
+
+        {/* Language Toggle */}
+        <button
+          onClick={toggleLanguage}
+          style={{ padding: 8, fontSize: "16px" }}
+          title={language === "en" ? "Switch to Danish" : "Skift til Engelsk"}
+        >
+          {language === "en" ? "DA 🇩🇰" : "EN 🇬🇧"}
+        </button>
+
+        {/* Logout Button */}
+        {user && (
+          <button
+            onClick={() => setUser(null)}
+            style={{ padding: 8, fontSize: "16px" }}
+          >
+            {texts[language].logout}
+          </button>
+        )}
+      </div>
+
+      {!user ? (
+        <LoginForm onLogin={setUser} />
+      ) : (
+        <div>
+          <h2 className="welcome-message">{texts[language].welcome}</h2>
+          {user.isAdmin ? (
+            <AdminPanel texts={texts[language]} />
+          ) : (
+            <RoomList
+              user={user}
+              searchTerm={searchTerm}
+              setSearchTerm={setSearchTerm}
+              texts={texts[language]} // Passing texts for the selected language
+            />
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default App;
