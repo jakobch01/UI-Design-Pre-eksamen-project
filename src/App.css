@@ -1,9 +1,26 @@
-/* Global styles for text */
-.text {
+/* -------------------- Root Theme Variables -------------------- */
+:root {
+  --btn-dark-bg: #3498db;
+  --btn-dark-hover: #2980b9;
+  --focus-outline: #007acc;
+}
+
+/* -------------------- Base Styles -------------------- */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  background-color: #f9f9f9;
+  color: #222;
+  line-height: 1.6;
+}
+
+body, h1, h2, h3, p {
   color: inherit;
 }
 
-/* Card styling for content */
+/* -------------------- Cards -------------------- */
 .card {
   background-color: white;
   color: black;
@@ -19,18 +36,38 @@ body.dark .card {
   border: 1px solid #444;
 }
 
-/* Light mode base styles */
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  background-color: #f9f9f9;
-  color: #222;
-  line-height: 1.6;
+/* -------------------- Headers -------------------- */
+h1, h2, h3 {
+  color: #111;
 }
 
-/* Input and Button styles */
-input, button {
+body.dark h1,
+body.dark h2,
+body.dark h3,
+body.dark p {
+  color: #f0f0f0;
+}
+
+/* -------------------- App Container -------------------- */
+.App {
+  text-align: center;
+  padding: 20px;
+}
+
+body.dark .App {
+  background-color: #121212;
+  color: white;
+}
+
+/* -------------------- Welcome Message -------------------- */
+.welcome-message {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+/* -------------------- Inputs & Buttons -------------------- */
+input,
+button {
   font-family: inherit;
   font-size: 1rem;
   padding: 0.5em;
@@ -38,29 +75,52 @@ input, button {
   border: 1px solid #ccc;
 }
 
+input[type="text"],
+input[type="date"],
+input[type="time"] {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 2px solid #ccc;
+  transition: border-color 0.3s ease;
+  background-color: #fff;
+  color: #333;
+}
+
+input[type="text"]:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Button Base */
 button {
+  padding: 10px 15px;
   background-color: #007bff;
-  color: white;
   border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
   transition: background-color 0.3s ease;
 }
 
+/* Button Hover */
 button:hover {
   background-color: #0056b3;
 }
 
+/* Focus Style */
 button:focus {
-  outline: 2px solid #007acc; /* or any visible color */
+  outline: 2px solid var(--focus-outline);
   outline-offset: 2px;
 }
 
-
-/* Header styling */
-h1, h2, h3 {
-  color: #111;
+/* Remove focus if using custom focus-visible */
+button:focus:not(:focus-visible) {
+  outline: none;
 }
 
-/* Dark mode styles */
+/* -------------------- Dark Mode -------------------- */
 body.dark {
   background-color: #121212;
   color: #f0f0f0;
@@ -79,25 +139,18 @@ body.dark input[type="time"] {
   color: #f0f0f0;
 }
 
+/* 🔧 Button Fix: Better contrast */
+body.dark button {
+  background-color: var(--btn-dark-bg);
+  border: 1px solid var(--btn-dark-bg);
+  color: white;
+}
+
 body.dark button:hover {
-  background-color: #333;
+  background-color: var(--btn-dark-hover);
 }
 
-/* Body Styling */
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f0f0f0;
-}
-
-/* App container */
-.App {
-  text-align: center;
-  padding: 20px;
-}
-
-/* Dark Mode Toggle button */
+/* -------------------- Dark Mode Toggle -------------------- */
 .dark-toggle {
   position: fixed;
   top: 10px;
@@ -107,22 +160,21 @@ body {
   border: none;
   font-size: 24px;
   cursor: pointer;
-  color: inherit; /* Make sure the button inherits color from the body */
-  padding: 10px; /* Ensure the button has proper padding */
-  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+  color: inherit;
+  padding: 10px;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Dark Mode specific styles for the toggle button */
 body.dark .dark-toggle {
-  background-color: #444; /* Darker background in dark mode */
-  color: #f0f0f0; /* Light text color */
+  background-color: #444;
+  color: #f0f0f0;
 }
 
 body.dark .dark-toggle:hover {
-  background-color: #555; /* Slightly lighter background on hover */
+  background-color: #555;
 }
 
-/* Styling for the search bar */
+/* -------------------- Search Bar -------------------- */
 .search-bar {
   position: fixed;
   top: 10px;
@@ -137,79 +189,11 @@ body.dark .dark-toggle:hover {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Dark mode background for the search bar */
 body.dark .search-bar {
   background: #444;
 }
 
-/* Input field styling */
-input[type="text"] {
-  padding: 10px;
-  width: 300px;
-  border: 2px solid #ccc;
-  border-radius: 5px;
-  font-size: 16px;
-  transition: border-color 0.3s ease;
-}
-
-/* Focus styling for input field */
-input[type="text"]:focus {
-  border-color: #007bff;
-  outline: none;
-}
-
-/* Button styling for consistency */
-button {
-  padding: 10px 15px;
-  background-color: #007bff;
-  border: none;
-  border-radius: 5px;
-  color: white;
-  cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s ease;
-}
-
-/* Button hover effect */
-button:hover {
-  background-color: #0056b3;
-}
-
-button:focus {
-  outline: none;
-}
-
-/* Ensuring proper text color inheritance */
-body, h1, h2, h3, p {
+/* -------------------- Text Utility -------------------- */
+.text {
   color: inherit;
-}
-
-/* Additional Dark Mode Styling for Text */
-body.dark h1, body.dark h2, body.dark h3, body.dark p {
-  color: #f0f0f0;  /* Light text in dark mode */
-}
-
-body.dark button {
-  background-color: #1e1e1e;
-  color: white;
-  border: 1px solid #444;
-}
-
-body.dark .App {
-  background-color: #121212;
-  color: white;
-}
-
-.welcome-message {
-  text-align: center;
-  margin-top: 2rem;
-}
-
-
-/* Light mode styles for form elements */
-body input[type="date"],
-body input[type="time"] {
-  background-color: #fff;
-  color: #333;
-  border: 1px solid #ccc;
 }
