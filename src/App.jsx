@@ -3,7 +3,7 @@ import LoginForm from "./LoginForm";
 import RoomList from "./RoomList";
 import AdminPanel from "./AdminPanel";
 import './App.css';
-import logo from './images/EAMV_logo.jpg'; // Importing the logo
+import logo from './images/EAMV_logo.jpg'; 
 
 function App() {
   const [user, setUser] = useState(null);
@@ -11,7 +11,7 @@ function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [language, setLanguage] = useState("en"); // Default language is English
 
-  // Apply dark mode class to <body>
+ 
   useEffect(() => {
     if (darkMode) {
       document.body.classList.add('dark');
@@ -30,10 +30,10 @@ function App() {
   const toggleLanguage = () => {
     const newLanguage = language === "en" ? "da" : "en";
     setLanguage(newLanguage);
-    localStorage.setItem('language', newLanguage); // Save the selected language to localStorage
+    localStorage.setItem('language', newLanguage); 
   };
 
-  // Text based on selected language
+
   const texts = {
     en: {
       welcome: `Welcome, ${user?.email || 'Guest'}`,
@@ -105,6 +105,7 @@ function App() {
         <button
           onClick={() => setDarkMode(!darkMode)}
           style={{ padding: 8, fontSize: "18px" }}
+          aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
         >
           {darkMode ? "🌞" : "🌙"}
         </button>
@@ -114,6 +115,7 @@ function App() {
           onClick={toggleLanguage}
           style={{ padding: 8, fontSize: "16px" }}
           title={language === "en" ? "Switch to Danish" : "Skift til Engelsk"}
+          aria-label={language === "en" ? "Switch to Danish" : "Switch to English"}
         >
           {language === "en" ? "DA 🇩🇰" : "EN 🇬🇧"}
         </button>
@@ -123,6 +125,7 @@ function App() {
           <button
             onClick={() => setUser(null)}
             style={{ padding: 8, fontSize: "16px" }}
+            aria-label="Log out"
           >
             {texts[language].logout}
           </button>
