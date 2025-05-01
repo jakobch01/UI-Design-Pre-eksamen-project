@@ -12,19 +12,24 @@ function App() {
   const [language, setLanguage] = useState("en"); // Default language is English
 
  
-  useEffect(() => {
-    if (darkMode) {
-      document.body.classList.add('dark');
-    } else {
-      document.body.classList.remove('dark');
-    }
+// Load settings from localStorage on mount
+useEffect(() => {
+  const storedMode = localStorage.getItem("darkMode");
+  if (storedMode) setDarkMode(storedMode === "true");
 
-    // Check for stored language in localStorage
-    const storedLanguage = localStorage.getItem('language');
-    if (storedLanguage) {
-      setLanguage(storedLanguage);
-    }
-  }, [darkMode]);
+  const storedLanguage = localStorage.getItem("language");
+  if (storedLanguage) setLanguage(storedLanguage);
+}, []);
+
+// Add/remove dark class when darkMode changes
+useEffect(() => {
+  if (darkMode) {
+    document.body.classList.add('dark');
+  } else {
+    document.body.classList.remove('dark');
+  }
+}, [darkMode]);
+
 
   // Toggle between Danish and English
   const toggleLanguage = () => {
@@ -103,9 +108,16 @@ function App() {
       >
         {/* Dark Mode Toggle */}
         <button
-          onClick={() => setDarkMode(!darkMode)}
+          onClick={() => {
+            setDarkMode((prev) => {
+              const newMode = !prev;
+              localStorage.setItem("darkMode", newMode);
+              return newMode;
+            });
+          }}
           style={{ padding: 8, fontSize: "18px" }}
           aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+          aria-pressed={darkMode}
         >
           {darkMode ? "🌞" : "🌙"}
         </button>
@@ -116,6 +128,7 @@ function App() {
           style={{ padding: 8, fontSize: "16px" }}
           title={language === "en" ? "Switch to Danish" : "Skift til Engelsk"}
           aria-label={language === "en" ? "Switch to Danish" : "Switch to English"}
+          aria-pressed={language}
         >
           {language === "en" ? "DA 🇩🇰" : "EN 🇬🇧"}
         </button>

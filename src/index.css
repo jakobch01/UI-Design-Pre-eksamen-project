@@ -43,10 +43,7 @@ button:hover {
   border-color: #646cff; /* Lighter blue border on hover */
 }
 
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
+
 
 /* Dark Mode Specific Styling */
 @media (prefers-color-scheme: dark) {

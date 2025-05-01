@@ -93,8 +93,8 @@ function RoomList({ user, texts }) {
               {selectedRoomId === room.id ? (
                 <div className="booking-form">
                   <div className="form-group">
-                    <label>{texts.selectDate}</label>
-                    <input
+                  <label htmlFor={`date-${room.id}`}>{texts.selectDate}</label>
+                  <input id={`date-${room.id}`}
                       type="date"
                       value={selectedDate}
                       onChange={(e) => setSelectedDate(e.target.value)}
@@ -104,7 +104,7 @@ function RoomList({ user, texts }) {
                   </div>
 
                   <div className="form-group">
-                  <label>{texts.selectDuration || "Select Duration"}</label>
+                  <label htmlFor={`duration-${room.id}`}>{texts.selectDuration || "Select Duration"}</label>
                   <select
                     value={selectedDuration}
                     onChange={(e) => setSelectedDuration(e.target.value)}
@@ -116,8 +116,8 @@ function RoomList({ user, texts }) {
                     <option value="90">1.5 hours</option>
                     <option value="120">2 hours</option>
                   </select>
-                    <label>{texts.selectTime}</label>
-                    <input
+                  <label htmlFor={`time-${room.id}`}>{texts.selectTime}</label>
+                  <input id={`time-${room.id}`}
                       type="time"
                       value={selectedTime}
                       onChange={(e) => setSelectedTime(e.target.value)}
@@ -129,12 +129,14 @@ function RoomList({ user, texts }) {
                     <button 
                       onClick={bookRoom}
                       className="primary-button"
+                      aria-label={`Book room ${rooms.find(r => r.id === selectedRoomId)?.name || ""}`}
                     >
                       {texts.bookRoomButton}
                     </button>
                     <button 
                       onClick={() => setSelectedRoomId(null)}
                       className="secondary-button"
+                      aria-label="Cancel room selection"
                     >
                       {texts.cancelButton || "Cancel"}
                     </button>
@@ -144,6 +146,7 @@ function RoomList({ user, texts }) {
                 <button 
                   onClick={() => setSelectedRoomId(room.id)}
                   className="primary-button"
+                  aria-label={`Select room ${room.name} to book`}
                 >
                   {texts.selectRoomButton || "Book this room"}
                 </button>
